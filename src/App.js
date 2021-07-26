@@ -28,13 +28,6 @@ function App() {
   ])
 
   const nextId = useRef(4)
-  // const onChange = e => {
-  //   const { name, value } = e.terget
-  //   setInputs({
-  //     ...inputs,
-  //     [name]: value,
-  //   })
-  // }
   const onChange =  e => {
     const { name, value } = e.target
     setInputs({
@@ -48,12 +41,15 @@ function App() {
       username,
       email
     }
-    setUsers(users=>users.concat(user))
+    setUsers(users.concat(user))
     setInputs({
       ...inputs,
       username:'',
       email:''
     })
+  }
+  const onRemove = (id)=>{
+    setUsers(users.filter(user=>user.id!==id))
   }
 
 
@@ -61,7 +57,7 @@ function App() {
   return (
     <>
       <CreateUser onChange = {onChange} username={username} onCreate={onCreate} email = {email}></CreateUser>
-      <UserList users={users}></UserList>
+      <UserList users={users} onRemove={onRemove}></UserList>
     </>
   )
 }
