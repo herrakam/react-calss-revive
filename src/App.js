@@ -38,34 +38,35 @@ function App() {
   const nextId = useRef(4)
   const onChange = useCallback( e => {
     const { name, value } = e.target
-    setInputs({
+    setInputs(inputs=> ({
       ...inputs,
       [name]: value,
-    })
-  },[inputs])
+    }))
+  },[])
   const onCreate = useCallback( () => {
     const user = {
       id: nextId.current,
       username,
       email
     }
-    setUsers(users.concat(user))
+    setUsers(users=>users.concat(user))
     setInputs({
       ...inputs,
       username: '',
       email: ''
     })
-  },[users, username, email,inputs])
+  },[ username, email,inputs])
+
   const onRemove = useCallback( (id) => {
-    setUsers(users.filter(user => user.id !== id))
-  },[users])
+    setUsers(users=>users.filter(user => user.id !== id))
+  },[])
 
   const onToggle = useCallback( id=>{
-    setUsers(users.map(user=>user.id===id?
+    setUsers(users=>users.map(user=>user.id===id?
       {...user, active : !user.active}
       : user
       ))
-  },[users])
+  },[])
 
   const count = useMemo(()=> countUsers(users), [users])
   return (
