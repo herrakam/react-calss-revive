@@ -5,9 +5,9 @@ function User({ user, onRemove,onToggle}) {
     useEffect(()=>{
         console.log(user);
         console.log('user값 설정됨');
-        return()=>{
+        return(()=>{
             console.log('user 바뀌는 중');
-        }
+        })
     },[user])
     return (
         <div className="user">
