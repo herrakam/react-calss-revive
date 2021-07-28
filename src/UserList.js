@@ -1,7 +1,14 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 function User({ user, onRemove,onToggle}) {
     const {username, email, id, active} = user
+    useEffect(()=>{
+        console.log(user);
+        console.log('user값 설정됨');
+        return()=>{
+            console.log('user 바뀌는 중');
+        }
+    },[user])
     return (
         <div className="user">
             <b style={{
