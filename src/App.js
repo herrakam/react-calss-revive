@@ -109,11 +109,12 @@ function App() {
     })
   },[])
 
+  const count = useMemo(()=> countUsers(users),[users])
   return (
     <>
       <CreateUser username={username } email={email} onChange={onChange} onCreate={onCreate}></CreateUser>
       <UserList users={users} onToggle={onToggle} onRemove={onRemove }></UserList>
-      <div className="countUser">0</div>
+      <div className="countUser">{count}</div>
     </>
   )
 }
