@@ -1,5 +1,5 @@
 
-import React, { useRef, useReducer, useMemo, useCallback } from "react";
+import React, { useRef, useReducer, useMemo, useCallback, createContext } from "react";
 import CreateUser from "./CreateUser";
 import UserList from "./UserList";
 import useInputs from "./useInputs";
@@ -55,6 +55,8 @@ const initialState = {
     }
   ]
 }
+
+export const UserDispatch = createContext(null)
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState)
   const {users} = state
@@ -94,11 +96,11 @@ function App() {
   const count = useMemo(()=> countUsers(users),[users])
 
   return (
-    <>
+    <UserDispatch.Provider value={dispatch} >
       <CreateUser username={username } email={email} onChange={onChange} onCreate={onCreate}></CreateUser>
-      <UserList users={users} onToggle={onToggle} onRemove={onRemove }></UserList>
+      <UserList users={users}></UserList>
       <div className="countUser">{count}</div>
-    </>
+    </UserDispatch.Provider>
   )
 }
 
